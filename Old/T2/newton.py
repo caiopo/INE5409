@@ -36,6 +36,26 @@ def briot_ruffini(n, p, x):
     return r
 
 
+def newton(n, p, x):
+    dif = 1
+    k = 0
+
+    while dif > 1e-12 and k < 120:
+        k += 1
+
+        r = briot_ruffini(n, p, x)
+
+        m = multiplicidade(r, 0.1)
+
+        delta = -r[m] / (m * r[m + 1])
+
+        dif = abs(delta)
+
+        x += delta
+
+    return x, r
+
+
 if __name__ == '__main__':
     p = np.array([2, 3, 0, -4])
 
