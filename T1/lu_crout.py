@@ -16,6 +16,7 @@ def swap_rows(k, A, b):
 
 def decompose(A, b):
     A = np.copy(A)
+    b = np.copy(b)
 
     n = len(A)
 
@@ -45,30 +46,37 @@ def decompose(A, b):
 def calc_x(A, b):
     n = len(A)
 
-    C = np.zeros(n)
-    X = np.zeros(n)
+    c = np.zeros(n)
+    x = np.zeros(n)
 
-    C[0] = b[0] / A[0, 0]
+    c[0] = b[0] / A[0, 0]
 
     for i in range(1, n):
-        sum_ = sum(A[i, :i] * C[:i])
-        C[i] = (b[i] - sum_) / A[i, i]
+        sum_ = sum(A[i, :i] * c[:i])
+        c[i] = (b[i] - sum_) / A[i, i]
 
-    X[n - 1] = C[n - 1]
+    x[n - 1] = c[n - 1]
 
     for i in range(n - 2, -1, -1):
-        sum_ = sum(A[i, i + 1:] * X[i + 1:])
-        X[i] = C[i] - sum_
+        sum_ = sum(A[i, i + 1:] * x[i + 1:])
+        x[i] = c[i] - sum_
 
-    return X
+    return x
 
 
 def lu_crout(A, b):
     A, b = decompose(A, b)
 
-    X = calc_x(A, b)
+    x = calc_x(A, b)
 
-    return X
+    return x
+
+
+def residuo(A, b, x):
+    return np.array([
+        abs(sum(A[i] * x) - b[i])
+        for i in range(len(A))
+    ], dtype=float)
 
 
 if __name__ == '__main__':

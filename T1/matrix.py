@@ -1,7 +1,5 @@
 import numpy as np
 
-n = 50  # Tamanho da matriz (n*n)
-
 '''
 i=1;            x(i)+x(i+1) = 1.50
 i=2:n/2         x(i-1)+4x(i)+x(i+1) = 1.00
@@ -10,7 +8,7 @@ i=n;            x(i-1)+x(i) = 3.00
 '''
 
 
-def create_matrix():
+def create_matrix(n):
     A = np.zeros((n, n))
     b = np.zeros(n)
 
