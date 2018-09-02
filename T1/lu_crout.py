@@ -20,12 +20,12 @@ def decompose(A, b):
 
     n = len(A)
 
-    for k in range(0, n):
+    for k in range(n):
 
         for i in range(k, n):
             sum_ = 0
 
-            for r in range(0, k):
+            for r in range(k):
                 sum_ += A[i, r] * A[r, k]
 
             A[i, k] = A[i, k] - sum_
@@ -35,7 +35,7 @@ def decompose(A, b):
         for j in range(k + 1, n):
             sum_ = 0
 
-            for r in range(0, k):
+            for r in range(k):
                 sum_ += A[k, r] * A[r, j]
 
             A[k, j] = (A[k, j] - sum_) / A[k, k]
