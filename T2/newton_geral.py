@@ -44,15 +44,15 @@ def optimize_root(f, xi, tol=1e-15):
     return xi
 
 
-def newton(f, start, end):
+def newton_geral(f, start, end):
     roots = find_roots(f, start, end)
 
     return np.array([
-        optimize_root(f, xi) for xi in roots
+        optimize_root(f, x) for x in roots
     ])
 
 
-def residue(f, roots):
+def residuo(f, roots):
     return np.array([abs(f(r)) for r in roots])
 
 
@@ -61,9 +61,10 @@ if __name__ == '__main__':
         def f(x):
             return x * tan(x) - 1
 
-        roots = newton(f, 0, 3 * pi)
+        roots = newton_geral(f, 0, 3 * pi)
 
         print(roots)
+        print(residuo(f, roots))
 
 
     main()
