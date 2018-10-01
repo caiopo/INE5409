@@ -36,17 +36,14 @@ def find_root_pn(p):
 
     for i in range(len(xi) + 1, len(p)):
         xi.append(
-            (random() - 0.5) * 0.5 * r +
-            (random() - 0.5) * 0.5j * r
+            (random() - 0.5) * 0.5 * r
         )
-
-    print('xi', xi)
 
     return np.array(xi)
 
 
 def briot_ruffini(n, p, x):
-    b = np.zeros(n, dtype=complex)
+    b = np.zeros(n, dtype=float)
 
     for i in range(0, n):
         b[i] = p[i] + x * b[i - 1]
@@ -78,7 +75,7 @@ def remainder(p, xi):
 
 
 def multiplicidade(r):
-    rlim = 1e-7
+    rlim = 1e-3
 
     m = 1
 
@@ -111,11 +108,11 @@ def newton_pn(p, xi, tol=1e-14, use_multiplicidade=True):
 
 def solve_newton_pn(p):
     n = len(p) - 1
-    x = np.zeros(n, dtype=complex)
+    x = np.zeros(n, dtype=float)
     m = np.zeros(n, dtype=int)
 
     for i in range(1, n):
-        p[i] = p[i] / p[1]
+        p[i] = p[i] / p[0]
 
     p[0] = 1
 
@@ -131,22 +128,17 @@ def solve_newton_pn(p):
 
         k += 1
 
-    return x, m
+    return x[:k], m[:k]
 
 
 if __name__ == '__main__':
     def main():
-        p = np.array([1, -3, 3, -1], dtype=complex)
+        p = np.array([1, -3, 3, -1], dtype=float)
 
         roots, multp = solve_newton_pn(p)
 
         print(list(roots))
         print(multp)
-
-        # a = (pn(p, 9.974652130855042e-01))
-        # b = (pn(p, 1.029296201703883e+00))
-        #
-        # print(a * b)
 
 
     main()
