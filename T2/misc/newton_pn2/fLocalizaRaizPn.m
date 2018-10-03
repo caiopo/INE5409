@@ -5,8 +5,8 @@ function xi = fLocalizaRaizPn(n, vec)
     final = r;
 
     step = 1/(10*pi);
-
     a = init;
+    xi = [];
     while a < final
         b = a+step;
         fA = fPn(n, vec, a);
@@ -16,12 +16,9 @@ function xi = fLocalizaRaizPn(n, vec)
         end
         a = b;
     end
-
-    xi
-
+    
     for i = length(xi)+1 : n
-        %xi(i) = complex((rand()-0.5)*0.5*r, (rand()-0.5)*0.5*r);
-        xi(i) = (rand()-0.5)*0.5*r;
+        xi(i) = complex((rand()-0.5)*0.5*r, (rand()-0.5)*0.5*r);
     end
     
     xi = transpose(xi);
