@@ -31,7 +31,7 @@ def find_roots(f, start, end):
 
 
 # Optimize root using Newton's Method
-def optimize_root(f, xi, tol=1e-15):
+def newton_geral(f, xi, tol=1e-15):
     dx = 2 * tol
     k = 0
 
@@ -44,11 +44,11 @@ def optimize_root(f, xi, tol=1e-15):
     return xi
 
 
-def newton_geral(f, start, end):
+def solve_newton_geral(f, start, end):
     roots = find_roots(f, start, end)
 
     return np.array([
-        optimize_root(f, x) for x in roots
+        newton_geral(f, x) for x in roots
     ])
 
 

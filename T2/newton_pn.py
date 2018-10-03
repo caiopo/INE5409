@@ -31,7 +31,7 @@ def find_root_pn(p):
         fa = pn(p, a)
         fb = pn(p, b)
 
-        if fa.real * fb.real <= 0:
+        if fa * fb <= 0:
             xi.append((a + b) / 2)
 
     for i in range(len(xi) + 1, len(p)):
@@ -123,7 +123,7 @@ def solve_newton_pn(p):
     while n > 0:
         x[k], m[k] = newton_pn(p, xi[k])
 
-        for j in range(0, m[k]):
+        for j in range(m[k]):
             n, p = briot_ruffini(n, p, x[k])
 
         k += 1
