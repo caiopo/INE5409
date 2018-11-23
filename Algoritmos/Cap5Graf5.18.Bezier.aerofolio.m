@@ -61,6 +61,7 @@ for i=1:n+1
 end%for
 xp=[xp xx];yp=[yp yy];xn=[xn x];yn=[yn y];
 
-plot(xn,yn,'--k',xn,yn,'*k','markersize',10,xp,yp,'-k','linewidth',2)
+plt=plot(xn,yn,'--k',xn,yn,'*k','markersize',10,xp,yp,'-k','linewidth',2)
 ylim([-0.5 4.5])
 grid on
+waitfor(plt)

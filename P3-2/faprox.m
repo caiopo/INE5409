@@ -1,10 +1,8 @@
 function [ygreg ymaclaurin ytcheb ypade] = faprox(a, b, x)
-    ngreg = 50;
+    ngreg = 15;
     xgreg = a : (b-a)/ngreg : b;
-    yexato = f(x);
 
-    difdiv1 = fdifdiv(ngreg, xgreg, yexato);
-    ygreg = fgregoryn(ngreg, xgreg, yexato, difdiv1, x);
+    ygreg = fPnGregoryNewton(ngreg, x);
 
     nmac = 15;
     cmac = fcoefMaclaurin(nmac,a,b);
