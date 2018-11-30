@@ -17,17 +17,25 @@ a2 = fCalculaCoefAjustegx1(x, y);
 yp2 = fgx1(a2, xp);
 desvioModulogx1 = sum(abs(fgx1(a2, x).-y))/length(x)
 
+a3 = fCalculaCoefAjustegx2(x, y);
+yp3 = fgx2(a3, xp);
+desvioModulogx3 = sum(abs(fgx2(a3, x).-y))/length(x)
+
 plt = plot(
-    x, y, '*',
+    x, y, '*k',
     xp, yp1, '-r',
-    xp, yp2, '-b'
+    xp, yp2, '-b',
+    xp, yp3, '-g'
 );
 legend(
     'Pontos originais',
-    'Ajuste polinomial',
-    'Ajuste g(x)'
+    'Polinomial',
+    'Combinação de seno e cosseno',
+    'Cosseno deslocado'
 );
-waitfor(plt);
+
+disp('')
+disp('A aproximação de melhor qualidade foi a Polinomial, porque resultou nos menores desvios.')
 
 disp('')
 disp('')
@@ -46,17 +54,6 @@ for i = 1:length(x)
     ysimpson(i) = temp(3);
 end
 
-
-
 erroTrapezios = max(abs(yerf - ytrapezios))
 erroGauss = max(abs(yerf - ygauss))
 erroSimpson = max(abs(yerf - ysimpson))
-
-% plt = plot(
-%     x, yerf, '-k',
-%     x, ytrapezios, '-b',
-%     x, ygauss, '-r',
-%     x, ysimpson, '-g'
-% );
-
-% waitfor(plt)
